@@ -1,0 +1,122 @@
+/* Reset moderno */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --azul-principal: #1a4e8a;
+    --azul-hover: #0d3a6d;
+    --gris-bordes: #d3d3d3;
+    --rojo-error: #cc0000;
+    --fondo-body: #5bb1f3;
+    --fondo-container: #f8f9fa;
+    --sombra: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+/* Tipografía mejorada */
+body {
+    font-family: 'Segoe UI', system-ui, sans-serif;
+    line-height: 1.6;
+    background: var(--fondo-body);
+    min-height: 100vh;
+    padding: 1rem;
+}
+
+/* Header responsive */
+.header__content {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    text-align: center;
+}
+
+.header__icon {
+    width: clamp(60px, 8vw, 100px); /* Tamaño responsive */
+    height: auto;
+    aspect-ratio: 1; /* Mantiene relación cuadrada */
+    border-radius: 12px;
+    box-shadow: var(--sombra);
+}
+
+.header__title {
+    font-size: clamp(1.5rem, 4vw, 2rem); /* Texto responsive */
+    color: var(--azul-principal);
+    margin-bottom: 0.5rem;
+}
+
+/* Formulario accesible */
+.form-section {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border: 2px solid var(--gris-bordes);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.form-section:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--sombra);
+}
+
+.form-group {
+    margin-bottom: 1.25rem;
+}
+
+input, textarea {
+    width: 100%;
+    padding: 0.875rem;
+    border: 2px solid var(--gris-bordes);
+    border-radius: 8px;
+    font-size: 1rem;
+    transition: border-color 0.3s;
+}
+
+input:focus {
+    border-color: var(--azul-principal);
+    outline: 3px solid rgba(26, 78, 138, 0.1);
+}
+
+/* Botón mejorado */
+.copy-btn {
+    background: var(--azul-principal);
+    color: white;
+    padding: 1rem 2rem;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+    width: 100%;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.copy-btn:hover {
+    background: var(--azul-hover);
+    transform: translateY(-2px);
+    box-shadow: var(--sombra);
+}
+
+/* Mensaje de confirmación animado */
+.copy-message {
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.3s;
+    background: #e8f4ff;
+    padding: 1rem;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.copy-message.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
