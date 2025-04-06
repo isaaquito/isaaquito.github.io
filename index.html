@@ -79,6 +79,7 @@ Se solicita a través de una proposición de ley por iniciativa popular, la cual
 
     <script>
         function generarSolicitud() {
+            // Validación de campos (se mantiene igual)
             const camposRequeridos = document.querySelectorAll('[required]');
             let valido = true;
             
@@ -96,43 +97,122 @@ Se solicita a través de una proposición de ley por iniciativa popular, la cual
                 return;
             }
             
+            // Generar contenido del correo
             const contenido = `Para: registro@defensordelpueblo.es
-Asunto: Solicitud formal de derecho a decidir
-
-------------------------------------------
-
-Ciudadano solicitante:
-- Nombre completo: ${document.getElementById('nombre').value}
-- DNI/NIE: ${document.getElementById('dni').value}
-- Fecha/lugar nacimiento: ${document.getElementById('nacimiento').value}
-- Dirección: ${document.getElementById('direccion').value}
-- Teléfono: ${document.getElementById('telefono').value}
-
-------------------------------------------
-
-Solicitud formal:
-${document.getElementById('solicitudText').value}`;
-
+        Asunto: Solicitud formal de derecho a decidir
+        
+        ------------------------------------------
+        
+        Ciudadano solicitante:
+        - Nombre completo: ${document.getElementById('nombre').value}
+        - DNI/NIE: ${document.getElementById('dni').value}
+        - Fecha/lugar nacimiento: ${document.getElementById('nacimiento').value}
+        - Dirección: ${document.getElementById('direccion').value}
+        - Teléfono: ${document.getElementById('telefono').value}
+        
+        ------------------------------------------
+        
+        Solicitud formal:
+        ${document.getElementById('solicitudText').value}`;
+        
+            // Copiar al portapeles
             navigator.clipboard.writeText(contenido.trim()).then(() => {
                 const mensaje = document.getElementById('mensajeCopiado');
                 mensaje.classList.add('visible');
                 setTimeout(() => mensaje.classList.remove('visible'), 3000);
                 
-                const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}`;
-                const gmailBtn = document.createElement('a');
-                gmailBtn.href = gmailUrl;
-                gmailBtn.target = '_blank';
-                gmailBtn.className = 'copy-btn gmail-btn';
-                gmailBtn.innerHTML = '<i class="fas fa-envelope"></i> Abrir en Gmail';
-                gmailBtn.style.marginTop = '10px';
-                gmailBtn.style.backgroundColor = '#D44638';
+                // Detectar dispositivo
+                const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
                 
-                document.querySelector('.email-form').appendChild(gmailBtn);
+                // Opciones para todos los dispositivos
+                const optionsDiv = document.createElement('div');
+                optionsDiv.className = 'send-options';
+                optionsDiv.innerHTML = `
+                    <p style="margin: 15px 0 10px; font-weight: bold; text-align: center;">Elija cómo enviar:</p>
+                    <div class="btn-group">
+                        <button onclick="window.location.href='mailto:registro@defensordelpueblo.es?subject=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}'" 
+                            class="email-btn">
+                            <i class="fas fa-envelope"></i> Usar cliente de correo
+                        </button>
+                        <button onclick="window.open('https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}', '_blank')" 
+                            class="gmail-btn">
+                            <i class="fab fa-google"></i> Abrir Gmail
+                        </button>
+                    </div>
+                `;
+                
+                // Eliminar opciones anteriores si existen
+                const oldOptions = document.querySelector('.send-options');
+                if (oldOptions) oldOptions.remove();
+                
+                document.querySelector('.email-form').appendChild(optionsDiv);
                 
             }).catch(() => {
                 alert('Por favor copie manualmente este texto:\n\n' + contenido);
             });
         }
-    </script>
+        </script>
+        
+        <style>
+        .send-options {
+            margin-top: 20px;
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .email-btn, .gmail-btn {
+            flex: 1;
+            min-width: 200px;
+            padding: 12px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+        
+        .email-btn {
+            background: #1a4e8a;
+        }
+        
+        .email-btn:hover {
+            background: #0d3a6d;
+            transform: translateY(-2px);
+        }
+        
+        .gmail-btn {
+            background: #D44638;
+        }
+        
+        .gmail-btn:hover {
+            background: #b03c30;
+            transform: translateY(-2px);
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @media (max-width: 768px) {
+            .btn-group {
+                flex-direction: column;
+            }
+            
+            .email-btn, .gmail-btn {
+                width: 100%;
+            }
+        }
+        </style>
 </body>
 </html>
