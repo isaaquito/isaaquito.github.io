@@ -66,7 +66,7 @@ body {
 }
 
 h1 {
-    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    background: linear-gradient(45deg, #111111, #333333, #222222);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;
@@ -128,7 +128,11 @@ h1 {
 
 .btn-primary {
     background: var(--azul-principal);
-    border: 2px solid rgba(255,255,255,0.2);
+    border: 2px solid rgba(0, 0, 0, 0.2);
+}
+.btn-primary1{
+    background:#6f02dc;
+    border: 2px solid rgb(174, 159, 255);
 }
 
 .btn-primary:hover {
