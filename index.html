@@ -2,79 +2,22 @@
 <html lang="es">
 <head>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciativa Ciudadana - Derecho a Decidir</title>
+    <link rel="stylesheet" href="styles.css">
+    
 </head>
-<!-- En el CSS -->
-<style>
-    :root {
-        /* Nuevo gradiente multicolor */
-        --fondo-body: linear-gradient(
-            45deg,
-            #FF6B6B 0%,
-            #4ECDC4 25%,
-            #45B7D1 50%,
-            #96C93D 75%,
-            #FFD700 100%
-        );
-    }
-    
-    .header__icon {
-        width: 200px;  /* Tamaño aumentado */
-        height: 200px;
-        margin-bottom: 1rem;
-        border: none;
-        animation: float 3s ease-in-out infinite, rainbow-border 4s infinite linear;
-        filter: drop-shadow(0 4px 6px rgba(0,0,0,0.1));
-    }
-    
-    h1 {
-        font-size: 2.5rem;
-        margin: 1rem 0;
-        position: relative;
-        background: linear-gradient(45deg, #FF6B6B, #4ECDC4, #45B7D1, #96C93D, #FFD700);
-        -webkit-background-clip: text;
-        background-clip: text;
-        -webkit-text-fill-color: transparent;
-        animation: text-glow 2s ease-in-out infinite alternate;
-    }
-    
-    @keyframes rainbow-border {
-        0% { box-shadow: 0 0 15px #FF6B6B; }
-        25% { box-shadow: 0 0 15px #4ECDC4; }
-        50% { box-shadow: 0 0 15px #45B7D1; }
-        75% { box-shadow: 0 0 15px #96C93D; }
-        100% { box-shadow: 0 0 15px #FFD700; }
-    }
-    
-    @keyframes text-glow {
-        from { text-shadow: 0 0 10px rgba(255,107,107,0.5); }
-        to { text-shadow: 0 0 20px rgba(78,205,196,0.8); }
-    }
-    
-    .container {
-        background: rgba(255, 255, 255, 0.95);
-        backdrop-filter: blur(20px);
-        border: 2px solid rgba(255,255,255,0.3);
-    }
-    
-    .btn {
-        font-size: 1.1rem;
-        padding: 1.5rem;
-    }
-    </style>
 <body>
-    <div class="container efecto-vidrio">
+    <div class="container">
         <header class="header">
             <img src="derecho_decidir.jpg" alt="Icono Derecho a Decidir" class="header__icon">
-            <h1>SOLICITUD<br>DERECHO A DECIDIR</h1>
+            <h1>SOLICITUD<br>DERECHO A DECIDIR </h1>
         </header>
 
         <main class="main-content">
             <div class="action-buttons">
+                
                 <button class="btn btn-danger" onclick="abrirGmail()">
                     <i class="fab fa-google"></i>
                     Abrir en Gmail
@@ -107,7 +50,7 @@
             </ol>
             <!-- <p style="margin-top: 1rem; font-style: italic; color: #555;">El sistema creará automáticamente el correo con la solicitud, solo tienes que añadir tus datos personales.</p> -->
         </section>
-        
+
     </div>
 
     <script>
