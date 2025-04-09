@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iniciativa Ciudadana - Derecho a Decidir</title>
+    <link rel="stylesheet" href="styles.css">
+    
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <img src="derecho_decidir.jpg" alt="Icono Derecho a Decidir" class="header__icon">
+            <h1>SOLICITUD<br>DERECHO A DECIDIR </h1>
+        </header>
+
+        <main class="main-content">
+            <div class="action-buttons">
+                
+                <button class="btn btn-danger" onclick="abrirGmail()">
+                    <i class="fab fa-google"></i>
+                    Abrir en Gmail
+                </button>
+
+                <button class="btn btn-primary" onclick="abrirClienteCorreo()">
+                    <i class="fas fa-envelope"></i>
+                    Abrir en Mail(iOS)
+                </button>
+                
+                <button class="btn btn-primary" onclick="copiarTexto()">
+                    <i class="fas fa-copy"></i>
+                    Copiar Texto
+                </button>
+            </div>
+        </main>
+
+        <section class="instrucciones">
+            <h3>¿Qué debes hacer?</h3>
+            <ol>
+                <li>Elige cómo quieres enviar la solicitud:
+                    <ul style="margin-top: 0.5rem; list-style-type: none; padding-left: 1rem;">
+                        <li>📌 <strong>Gmail</strong> (para usuarios de Google)</li>
+                        <li>📌 <strong>Mail</strong> (para iPhone/iPad)</li>
+                        <li>📌 <strong>Copiar texto</strong> (para otros servicios)</li>
+                    </ul>
+                </li>
+                <li>Completa los datos que faltan en el correo (tu nombre, DNI, etc.)</li>
+                <li style="font-weight: bold;">¡IMPORTANTE! Asegúrate de enviarlo a: <span style="color: var(--azul-principal);">registro@defensordelpueblo.es</span></li>
+            </ol>
+            <!-- <p style="margin-top: 1rem; font-style: italic; color: #555;">El sistema creará automáticamente el correo con la solicitud, solo tienes que añadir tus datos personales.</p> -->
+        </section>
+
+    </div>
+
+    <script>
+        const contenidoBase = `Para: registro@defensordelpueblo.es
+Asunto: Solicitud formal de derecho a decidir
+
+------------------------------------------
+
+Ciudadano solicitante:
+- Nombre completo: [COMPLETAR AQUÍ]
+- DNI/NIE: [COMPLETAR AQUÍ]
+- Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
+- Dirección: [COMPLETAR AQUÍ]
+- Teléfono: [COMPLETAR AQUÍ]
+
+------------------------------------------
+
+Solicitud formal:
+Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
+
+Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
+
+        function abrirClienteCorreo() {
+            const subject = 'Solicitud formal de derecho a decidir';
+            const body = contenidoBase;
+            window.location.href = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+        }
+
+        function abrirGmail() {
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
+            const subject = 'Solicitud formal de derecho a decidir';
+            const body = contenidoBase;
+            
+            // Nueva solución para evitar doble apertura
+            let gmailOpened = false;
+            
+            const tryOpenApp = (urlScheme, fallbackUrl) => {
+                const iframe = document.createElement('iframe');
+                iframe.style.display = 'none';
+                iframe.src = urlScheme;
+                document.body.appendChild(iframe);
+                
+                setTimeout(() => {
+                    document.body.removeChild(iframe);
+                    if (!gmailOpened) {
+                        window.open(fallbackUrl, '_blank');
+                    }
+                }, 300);
+            };
+
+            if (isAndroid) {
+                // URL para Android con detección precisa
+                const appUrl = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;scheme=googlemail;package=com.google.android.gm;end;`;
+                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                tryOpenApp(appUrl, webUrl);
+                gmailOpened = true;
+
+            } else if (isiOS) {
+                // URL para iOS con verificación nativa
+                const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                
+                window.location.href = appUrl;
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(webUrl, '_blank');
+                    }
+                }, 500);
+                
+            } else {
+                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            }
+        }
+
+        function copiarTexto() {
+            const textarea = document.createElement('textarea');
+            textarea.value = contenidoBase;
+            textarea.style.position = 'fixed';
+            textarea.style.opacity = '0';
+            document.body.appendChild(textarea);
+            textarea.select();
+            
+            try {
+                const successful = document.execCommand('copy');
+                document.body.removeChild(textarea);
+                
+                if (successful) {
+                    alert('✅ Texto copiado al portapapeles\n\nPega directamente en tu correo');
+                } else {
+                    throw new Error('Falló la copia');
+                }
+            } catch (err) {
+                const copyText = window.prompt('Por favor copia este texto manualmente:', contenidoBase);
+                if (copyText) {
+                    alert('Gracias por copiar el texto');
+                }
+            }
+        }
+    </script>
+</body>
+</html>
