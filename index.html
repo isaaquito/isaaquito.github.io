@@ -4,213 +4,201 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Solicitud ciudadana para el derecho a decidir sobre cargos públicos">
-    <meta name="keywords" content="defensor del pueblo, iniciativa popular, derecho a decidir">
-    <title>Solicitud Derecho a Decidir</title>
+    <title>Derecho a Decidir</title>
     <style>
-        :root{--azul-principal:#1a4e8a;--azul-hover:#0d3a6d;--gris-bordes:#d3d3d3;--rojo-error:#cc0000;--fondo-body:#5bb1f3;--fondo-container:#f8f9fa;--sombra:0 4px 6px -1px rgba(0,0,0,0.1)}*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}body{font-family:'Segoe UI',system-ui,sans-serif;line-height:1.6;background:var(--fondo-body);min-height:100vh;padding:1rem}.container{max-width:800px;margin:0 auto;background:var(--fondo-container);border-radius:12px;box-shadow:var(--sombra);padding:2rem}.header__content{display:flex;align-items:center;gap:1.5rem;margin-bottom:2rem;flex-wrap:wrap;justify-content:center;text-align:center}.header__icon{width:clamp(60px,8vw,100px);height:auto;aspect-ratio:1;border-radius:12px;box-shadow:var(--sombra)}.header__title{font-size:clamp(1.5rem,4vw,2rem);color:var(--azul-principal);margin-bottom:0.5rem}.form-section{background:#fff;border-radius:12px;padding:1.5rem;margin:1.5rem 0;border:2px solid var(--gris-bordes);transition:transform .2s,box-shadow .2s}.form-section:hover{transform:translateY(-2px);box-shadow:var(--sombra)}.form-group{margin-bottom:1.25rem}label{display:block;margin-bottom:.5rem;font-weight:600}input,textarea{width:100%;padding:.875rem;border:2px solid var(--gris-bordes);border-radius:8px;font-size:1rem;transition:border-color .3s}input:focus,textarea:focus{border-color:var(--azul-principal);outline:3px solid rgba(26,78,138,.1)}.copy-btn{background:var(--azul-principal);color:#fff;padding:1rem 2rem;border:none;border-radius:8px;cursor:pointer;font-weight:600;width:100%;transition:all .3s;display:flex;align-items:center;justify-content:center;gap:.5rem}.copy-btn:hover{background:var(--azul-hover);transform:translateY(-2px);box-shadow:var(--sombra)}.required:after{content:" *";color:var(--rojo-error)}.copy-message{opacity:0;transform:translateY(10px);transition:all .3s;background:#e8f4ff;padding:1rem;border-radius:8px;text-align:center;margin-top:1rem}.copy-message.visible{opacity:1;transform:translateY(0)}.campo-error{border-color:var(--rojo-error)!important}.label-error{color:var(--rojo-error)}.send-options{margin-top:20px;animation:fadeIn 0.3s ease}.btn-group{display:flex;gap:10px;flex-wrap:wrap}.email-btn,.gmail-btn{flex:1;min-width:200px;padding:12px;border:none;border-radius:8px;color:white;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px;transition:all 0.3s}.email-btn{background:#1a4e8a}.email-btn:hover{background:#0d3a6d;transform:translateY(-2px)}.gmail-btn{background:#D44638}.gmail-btn:hover{background:#b03c30;transform:translateY(-2px)}@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}@media (max-width:768px){.btn-group{flex-direction:column}.email-btn,.gmail-btn{width:100%}}.modal-overlay{position:fixed;top:0;left:0;right:0;bottom:0;background-color:rgba(0,0,0,0.5);display:flex;justify-content:center;align-items:center;z-index:1000;animation:fadeIn 0.3s ease}.modal-container{background-color:white;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,0.3);width:90%;max-width:700px;max-height:80vh;display:flex;flex-direction:column;overflow:hidden}.modal-header{padding:15px 20px;background-color:#1a4e8a;color:white;display:flex;justify-content:space-between;align-items:center}.modal-header h3{margin:0;font-size:1.2rem}.close-btn{background:none;border:none;color:white;font-size:1.5rem;cursor:pointer;padding:0 10px}.modal-content{padding:20px;overflow-y:auto;flex-grow:1}.modal-content pre{white-space:pre-wrap;font-family:inherit;margin:0}.modal-footer{padding:15px 20px;display:flex;gap:10px;justify-content:flex-end;border-top:1px solid #eee}.copy-btn-modal,.close-btn-modal{padding:10px 15px;border:none;border-radius:5px;cursor:pointer;display:flex;align-items:center;gap:8px;font-weight:600;transition:all 0.2s}.copy-btn-modal{background-color:#1a4e8a;color:white}.copy-btn-modal:hover{background-color:#0d3a6d}.close-btn-modal{background-color:#f1f1f1;color:#333}.close-btn-modal:hover{background-color:#ddd}@media (max-width:768px){.modal-footer{flex-direction:column}.copy-btn-modal,.close-btn-modal{width:100%;justify-content:center}}</style>
+        :root {
+            --azul-principal: #1a4e8a;
+            --azul-hover: #0d3a6d;
+            --gris-bordes: #d3d3d3;
+            --fondo-body: #5bb1f3;
+            --fondo-container: #ffffff;
+            --sombra: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', system-ui, sans-serif;
+            background: var(--fondo-body);
+            min-height: 100vh;
+            padding: 1rem;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: var(--sombra);
+            padding: 2rem 1.5rem;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .header__icon {
+            width: 100px;
+            height: 100px;
+            margin-bottom: 1.5rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        h1 {
+            color: var(--azul-principal);
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .main-content {
+            text-align: center;
+        }
+
+        .action-buttons {
+            display: grid;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        .btn {
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: var(--azul-principal);
+        }
+
+        .btn-primary:hover {
+            background: var(--azul-hover);
+            transform: translateY(-2px);
+        }
+
+        .btn-danger {
+            background: #D44638;
+        }
+
+        .btn-danger:hover {
+            background: #b03c30;
+            transform: translateY(-2px);
+        }
+
+        .instrucciones {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                border-radius: 0;
+                padding: 1.5rem 1rem;
+            }
+            
+            .btn {
+                font-size: 0.9rem;
+                padding: 1rem;
+            }
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <header class="header">
-            <div class="header__content">
-                <img src="derecho_decidir.jpeg" alt="Icono derecho a decidir" class="header__icon" loading="lazy">
-                <div class="header__text">
-                    <h1 class="header__title">Solicitud Ciudadana</h1>
-                    <p class="header__subtitle">Propuesta de iniciativa popular</p>
-                </div>
-            </div>
+            <img src="derecho_decidir.jpeg" alt="Icono" class="header__icon">
+            <h1>Iniciativa Ciudadana<br>Derecho a Decidir</h1>
         </header>
 
         <main class="main-content">
-            <form id="solicitudForm" class="email-form">
-                <div class="form-section">
-                    <h3>Datos del Ciudadano</h3>
-                    <div class="form-group">
-                        <label for="nombre" class="required">Nombre completo:</label>
-                        <input type="text" id="nombre" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="dni" class="required">DNI/NIE:</label>
-                        <input type="text" id="dni" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="nacimiento" class="required">Fecha y lugar de nacimiento:</label>
-                        <input type="text" id="nacimiento" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="direccion" class="required">Dirección completa:</label>
-                        <input type="text" id="direccion" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="telefono" class="required">Teléfono de contacto:</label>
-                        <input type="tel" id="telefono" required>
-                    </div>
-                </div>
-
-                <div class="form-section">
-                    <h3>Solicitud</h3>
-                    <div class="form-group">
-                        <label class="required">Texto de la solicitud:</label>
-                        <textarea id="solicitudText" rows="6" readonly>
-Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
-
-Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.</textarea>
-                    </div>
-                </div>
-
-                <button type="button" class="copy-btn" onclick="generarSolicitud()">
-                    Generar correo para copiar
+            <div class="action-buttons">
+                <a href="#" class="btn btn-primary" onclick="abrirClienteCorreo()">
+                    <i class="fas fa-envelope"></i>
+                    Redactar Correo
+                </a>
+                
+                <a href="#" class="btn btn-danger" onclick="abrirGmail()">
+                    <i class="fab fa-google"></i>
+                    Abrir en Gmail
+                </a>
+                
+                <button class="btn btn-primary" onclick="copiarTexto()">
+                    <i class="fas fa-copy"></i>
+                    Copiar Texto
                 </button>
-                <p id="mensajeCopiado" class="copy-message">¡Texto copiado al portapapeles!</p>
-            </form>
+            </div>
         </main>
 
         <section class="instrucciones">
-            <h3>Instrucciones de uso:</h3>
+            <h3>¿Cómo participar?</h3>
             <ol>
-                <li>Complete todos los campos obligatorios</li>
-                <li>Haga clic en "Generar correo"</li>
-                <li>El sistema creará automáticamente el texto listo para pegar</li>
-                <li>Enviar a: <strong>registro@defensordelpueblo.es</strong></li>
+                <li>Haz clic en cualquier botón superior</li>
+                <li>Completa tus datos personales en el correo</li>
+                <li>Envía a: <strong>registro@defensordelpueblo.es</strong></li>
             </ol>
         </section>
     </div>
 
     <script>
-    function generarSolicitud() {
-        // Validación de campos
-        const camposRequeridos = document.querySelectorAll('[required]');
-        let valido = true;
-        
-        camposRequeridos.forEach(campo => {
-            if (!campo.value.trim()) {
-                campo.style.borderColor = 'red';
-                valido = false;
-            } else {
-                campo.style.borderColor = '#ddd';
-            }
-        });
-        
-        if (!valido) {
-            alert('Por favor complete todos los campos marcados con *');
-            return;
-        }
-        
-        // Generar contenido del correo
-        const contenido = `Para: registro@defensordelpueblo.es
+        const contenidoBase = `Para: registro@defensordelpueblo.es
 Asunto: Solicitud formal de derecho a decidir
 
 ------------------------------------------
 
 Ciudadano solicitante:
-- Nombre completo: ${document.getElementById('nombre').value}
-- DNI/NIE: ${document.getElementById('dni').value}
-- Fecha/lugar nacimiento: ${document.getElementById('nacimiento').value}
-- Dirección: ${document.getElementById('direccion').value}
-- Teléfono: ${document.getElementById('telefono').value}
+- Nombre completo: [COMPLETAR AQUÍ]
+- DNI/NIE: [COMPLETAR AQUÍ]
+- Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
+- Dirección: [COMPLETAR AQUÍ]
+- Teléfono: [COMPLETAR AQUÍ]
 
 ------------------------------------------
 
 Solicitud formal:
-${document.getElementById('solicitudText').value}`;
+Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
 
-        // Copiar al portapeles
-        navigator.clipboard.writeText(contenido.trim()).then(() => {
-            const mensaje = document.getElementById('mensajeCopiado');
-            mensaje.classList.add('visible');
-            setTimeout(() => mensaje.classList.remove('visible'), 3000);
-            
-            // Mostrar ventana emergente y opciones
-            mostrarVentanaEmergente(contenido);
-            mostrarOpcionesEnvio(contenido);
-            
-        }).catch(() => {
-            alert('Por favor copie manualmente este texto:\n\n' + contenido);
-        });
-    }
+Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
 
-    function mostrarVentanaEmergente(contenido) {
-        const overlay = document.createElement('div');
-        overlay.className = 'modal-overlay';
-        
-        const modal = document.createElement('div');
-        modal.className = 'modal-container';
-        modal.innerHTML = `
-            <div class="modal-header">
-                <h3>Previsualización del correo</h3>
-                <button class="close-btn">&times;</button>
-            </div>
-            <div class="modal-content">
-                <pre>${contenido}</pre>
-            </div>
-            <div class="modal-footer">
-                <button class="copy-btn-modal">
-                    <i class="fas fa-copy"></i> Copiar texto
-                </button>
-                <button class="close-btn-modal">
-                    <i class="fas fa-times"></i> Cerrar
-                </button>
-            </div>
-        `;
-        
-        overlay.appendChild(modal);
-        document.body.appendChild(overlay);
-        
-        // Funcionalidad de la modal
-        modal.querySelector('.close-btn').addEventListener('click', () => {
-            document.body.removeChild(overlay);
-        });
-        
-        modal.querySelector('.close-btn-modal').addEventListener('click', () => {
-            document.body.removeChild(overlay);
-        });
-        
-        modal.querySelector('.copy-btn-modal').addEventListener('click', () => {
-            navigator.clipboard.writeText(contenido.trim()).then(() => {
-                const btn = modal.querySelector('.copy-btn-modal');
-                btn.innerHTML = '<i class="fas fa-check"></i> ¡Copiado!';
-                setTimeout(() => {
-                    btn.innerHTML = '<i class="fas fa-copy"></i> Copiar texto';
-                }, 2000);
-            });
-        });
-    }
+        function abrirClienteCorreo() {
+            window.location.href = `mailto:registro@defensordelpueblo.es?subject=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenidoBase)}`;
+        }
 
-    function mostrarOpcionesEnvio(contenido) {
-        const optionsDiv = document.createElement('div');
-        optionsDiv.className = 'send-options';
-        optionsDiv.innerHTML = `
-            <div class="btn-group">
-                <button class="email-btn">
-                    <i class="fas fa-envelope"></i> Usar cliente de correo
-                </button>
-                <button class="gmail-btn">
-                    <i class="fab fa-google"></i> Abrir en Gmail
-                </button>
-            </div>
-        `;
-
-        // Eliminar opciones anteriores si existen
-        const oldOptions = document.querySelector('.send-options');
-        if (oldOptions) oldOptions.remove();
-        
-        document.querySelector('.email-form').appendChild(optionsDiv);
-
-        // Funcionalidad de los botones
-        optionsDiv.querySelector('.email-btn').addEventListener('click', () => {
-            window.location.href = `mailto:registro@defensordelpueblo.es?subject=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}`;
-        });
-
-        optionsDiv.querySelector('.gmail-btn').addEventListener('click', () => {
+        function abrirGmail() {
             const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
             const gmailUrl = isMobile ? 
-                `https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&to=registro@defensordelpueblo.es&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}` :
-                `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=${encodeURIComponent(contenido)}`;
+                'https://mail.google.com/mail/u/0/?view=cm&fs=1&tf=1&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=' + encodeURIComponent(contenidoBase) :
+                'https://mail.google.com/mail/?view=cm&fs=1&su=Solicitud%20formal%20de%20derecho%20a%20decidir&body=' + encodeURIComponent(contenidoBase);
             
             window.open(gmailUrl, '_blank');
-        });
-    }
+        }
+
+        function copiarTexto() {
+            navigator.clipboard.writeText(contenidoBase).then(() => {
+                alert('Texto copiado al portapapeles');
+            }).catch(() => {
+                prompt('Por favor copia manualmente este texto:', contenidoBase);
+            });
+        }
     </script>
 </body>
 </html>
