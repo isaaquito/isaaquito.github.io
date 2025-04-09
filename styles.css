@@ -1,59 +1,85 @@
 /* styles.css */
+/* Reset moderno */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
 :root {
-    --azul-principal: #1a4e8a;
-    --azul-hover: #0d3a6d;
-    --gris-bordes: #d3d3d3;
-    --rojo-error: #cc0000;
-    --fondo-body: linear-gradient(135deg, #5bb1f3 0%, #3f87ce 100%);
-    --fondo-container: rgba(255, 255, 255, 0.95);
-    --sombra: 0 8px 32px rgba(0, 0, 0, 0.1);
-    --degradado-btn: linear-gradient(135deg, #1a4e8a 0%, #0d3a6d 100%);
+    --azul-principal: #2a5298;
+    --azul-hover: #1a3d7a;
+    --degradado-fondo: linear-gradient(
+        45deg,
+        #ff6b6b,
+        #ff8e8e,
+        #4ecdc4,
+        #45b7d1,
+        #96c93d,
+        #5ff7d2
+    );
+    --sombra: 0 4px 20px rgba(0, 0, 0, 0.15);
+    --borde-redondeado: 15px;
 }
 
 body {
-    font-family: 'Poppins', system-ui, sans-serif;
+    font-family: 'Segoe UI', system-ui, sans-serif;
     line-height: 1.6;
-    background-image: var(--fondo-body);
+    background: var(--degradado-fondo);
+    background-size: 400% 400%;
     min-height: 100vh;
     padding: 1rem;
-    background-attachment: fixed;
+    animation: gradientBG 10s ease infinite;
 }
 
 .container {
-    max-width: 600px;
-    margin: 2rem auto;
-    background: var(--fondo-container);
-    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.96);
+    backdrop-filter: blur(12px);
+    border-radius: var(--borde-redondeado);
     box-shadow: var(--sombra);
-    padding: 2.5rem 2rem;
-    backdrop-filter: blur(10px);
-    border: 1px solid rgba(255, 255, 255, 0.2);
-    animation: slideUp 0.8s cubic-bezier(0.23, 1, 0.32, 1);
+    padding: 2rem;
+    max-width: 600px;
+    margin: 1rem auto;
+    border: 2px solid rgba(255,255,255,0.3);
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 2rem;
 }
 
 .header__icon {
-    width: 120px;
-    height: 120px;
-    margin-bottom: 1.5rem;
-    animation: float 3s ease-in-out infinite;
+    width: 140px;
+    height: 140px;
     border-radius: 50%;
     object-fit: cover;
-    border: 3px solid white;
-    box-shadow: 0 8px 24px rgba(26, 78, 138, 0.2);
-    transition: transform 0.3s ease;
+    border: 4px solid rgba(255,255,255,0.9);
+    box-shadow: var(--sombra);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    animation: iconFloat 3s ease-in-out infinite;
 }
 
-.header__icon:hover {
-    transform: scale(1.05) rotate(-5deg);
+@keyframes iconFloat {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    30% { transform: translateY(-15px) rotate(3deg); }
+    70% { transform: translateY(10px) rotate(-3deg); }
 }
 
 h1 {
-    color: var(--azul-principal);
-    font-size: 2.2rem;
-    margin-bottom: 1.5rem;
-    line-height: 1.2;
-    font-weight: 700;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+    background: linear-gradient(45deg, #ff6b6b, #4ecdc4, #45b7d1);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 2.3rem;
+    margin: 1.5rem 0;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    animation: titleGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes titleGlow {
+    from { opacity: 0.9; }
+    to { opacity: 1; text-shadow: 3px 3px 8px rgba(0,0,0,0.2); }
 }
 
 .action-buttons {
@@ -65,208 +91,113 @@ h1 {
 .btn {
     padding: 1.3rem;
     border: none;
-    border-radius: 15px;
+    border-radius: var(--borde-redondeado);
     color: white;
-    font-weight: 600;
+    font-weight: 700;
     cursor: pointer;
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 12px;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-    text-decoration: none;
-    font-size: 1.05rem;
-    letter-spacing: 0.5px;
     position: relative;
     overflow: hidden;
+    transform-style: preserve-3d;
 }
 
+.btn::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(
+        45deg,
+        transparent,
+        rgba(255,255,255,0.3),
+        transparent
+    );
+    transform: rotate(45deg);
+    transition: 0.5s;
+}
 
-
-
+.btn:hover::before {
+    left: 150%;
+}
 
 .btn-primary {
-    background: var(--degradado-btn);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: var(--azul-principal);
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .btn-primary:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(26, 78, 138, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
 }
 
 .btn-danger {
-    background: linear-gradient(135deg, #D44638 0%, #b03c30 100%);
-    border: 2px solid rgba(255, 255, 255, 0.2);
+    background: linear-gradient(45deg, #ff4757, #ff6b6b);
+    border: 2px solid rgba(255,255,255,0.2);
 }
 
 .btn-danger:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 20px rgba(212, 70, 56, 0.3);
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(255, 107, 107, 0.4);
 }
 
 .instrucciones {
-    margin-top: 2.5rem;
-    padding: 2rem;
-    background: rgba(248, 249, 250, 0.9);
-    border-radius: 15px;
-    text-align: left;
-    border: 1px solid rgba(26, 78, 138, 0.1);
+    background: rgba(255, 255, 255, 0.9);
+    padding: 1.8rem;
+    border-radius: var(--borde-redondeado);
+    margin-top: 2rem;
     position: relative;
+    border: 2px solid rgba(255,255,255,0.3);
 }
 
-
-
-
-.instrucciones h3 {
-    color: var(--azul-principal);
-    font-size: 1.4rem;
-    margin-bottom: 1.2rem;
-    position: relative;
-    padding-left: 1.5rem;
-}
-
-.instrucciones h3:before {
-    content: '📌';
-    position: absolute;
-    left: 0;
-    top: -2px;
-}
-
-.instrucciones ol {
-    padding-left: 1.5rem;
-}
-
-.instrucciones li {
-    margin-bottom: 1rem;
-    padding-left: 0.5rem;
-    position: relative;
-}
-
-
-@keyframes float {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-12px); }
-}
-
-@keyframes slideUp {
-    from {
-        opacity: 0;
-        transform: translateY(50px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
-    }
-}
-
-@keyframes borderGlow {
-    0% { opacity: 0.2; }
-    50% { opacity: 0.5; }
-    100% { opacity: 0.2; }
+@keyframes gradientBG {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
 }
 
 @media (max-width: 480px) {
     .container {
-        padding: 1.8rem 1.2rem;
-        margin: 1rem;
-        border-radius: 15px;
-    }
-    
-    .btn {
-        padding: 1.2rem;
-        font-size: 0.95rem;
+        padding: 1.5rem;
+        margin: 0.5rem;
     }
     
     h1 {
         font-size: 1.8rem;
     }
     
-    .instrucciones {
-        padding: 1.5rem;
-    }
-
-    .efecto-vidrio {
-        backdrop-filter: blur(10px);
-        background: rgba(255, 255, 255, 0.9);
+    .header__icon {
+        width: 110px;
+        height: 110px;
     }
     
-    .lista-opciones {
-        margin: 0.9rem 0;
-        list-style: none;
-        padding-left: 1rem;
+    .btn {
+        padding: 1.1rem;
+        font-size: 0.95rem;
     }
-    
-    .importante {
-        font-weight: bold;
-        margin-top: 1rem;
+}
+
+/* Efectos adicionales para móviles */
+@media (hover: hover) {
+    .btn:hover {
+        transform: translateY(-2px);
     }
-    
-    .email-destino {
-        color: var(--azul-principal);
-        word-break: break-all;
-    }
-
-    /* Añade esto a tu CSS */
-.instrucciones {
-    margin-top: 2rem;
-    padding: 1.5rem;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.05);
 }
-
-.paso {
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-    margin: 1.5rem 0;
+.instrucciones h3:before {
+    content: '📌';
+    position: absolute;
+    left: 0;
+    top: -2px;
 }
-
-.check {
-    font-size: 1.4rem;
-    margin-top: 0.3rem;
-}
-
-.contenido-paso {
-    flex: 1;
-    font-size: 1rem;
-    color: #444;
-}
-
-.opciones-envio {
-    margin: 0.5rem 0 0 1rem;
-    list-style: none;
-}
-
-.opciones-envio li {
-    margin: 0.8rem 0;
-    padding: 0.5rem;
-    background: #f8f9fa;
-    border-radius: 8px;
-    border-left: 4px solid var(--azul-principal);
-}
-
-.separador {
-    height: 1px;
-    background: #e0e0e0;
-    margin: 1.5rem 0;
-}
-
-.importante .check {
-    color: #d44638;
-}
-
-.email-destino {
-    display: inline-block;
-    margin-top: 0.5rem;
-    padding: 0.8rem;
-    background: #f8f9fa;
-    border-radius: 8px;
+.instrucciones h3 {
     color: var(--azul-principal);
-    font-weight: 700;
-    word-break: break-all;
-}
-
-
+    font-size: 1.4rem;
+    margin-bottom: 1.2rem;
+    position: relative;
+    padding-left: 1.5rem;
 }
