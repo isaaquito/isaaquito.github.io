@@ -138,19 +138,20 @@
     <div class="container">
         <header class="header">
             <img src="derecho_decidir.jpeg" alt="Icono Derecho a Decidir" class="header__icon">
-            <h1>Iniciativa Ciudadana<br>Derecho a Decidir</h1>
+            <h1>SOLICITUD<br>DERECHO A DECIDIR </h1>
         </header>
 
         <main class="main-content">
             <div class="action-buttons">
-                <button class="btn btn-primary" onclick="abrirClienteCorreo()">
-                    <i class="fas fa-envelope"></i>
-                    Redactar Correo
-                </button>
                 
                 <button class="btn btn-danger" onclick="abrirGmail()">
                     <i class="fab fa-google"></i>
                     Abrir en Gmail
+                </button>
+
+                <button class="btn btn-primary" onclick="abrirClienteCorreo()">
+                    <i class="fas fa-envelope"></i>
+                    Abrir en Mail(iOS)
                 </button>
                 
                 <button class="btn btn-primary" onclick="copiarTexto()">
@@ -161,13 +162,21 @@
         </main>
 
         <section class="instrucciones">
-            <h3>¿Cómo participar?</h3>
+            <h3>¿Qué debes hacer?</h3>
             <ol>
-                <li>Haz clic en cualquier botón superior</li>
-                <li>Completa tus datos personales en el correo</li>
-                <li>Envía a: <strong>registro@defensordelpueblo.es</strong></li>
+                <li>Elige cómo quieres enviar la solicitud:
+                    <ul style="margin-top: 0.5rem; list-style-type: none; padding-left: 1rem;">
+                        <li>📌 <strong>Gmail</strong> (para usuarios de Google)</li>
+                        <li>📌 <strong>Mail</strong> (para iPhone/iPad)</li>
+                        <li>📌 <strong>Copiar texto</strong> (para otros servicios)</li>
+                    </ul>
+                </li>
+                <li>Completa los datos que faltan en el correo (tu nombre, DNI, etc.)</li>
+                <li style="font-weight: bold;">¡IMPORTANTE! Asegúrate de enviarlo a: <span style="color: var(--azul-principal);">registro@defensordelpueblo.es</span></li>
             </ol>
+            <!-- <p style="margin-top: 1rem; font-style: italic; color: #555;">El sistema creará automáticamente el correo con la solicitud, solo tienes que añadir tus datos personales.</p> -->
         </section>
+
     </div>
 
     <script>
