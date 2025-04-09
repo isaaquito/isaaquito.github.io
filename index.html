@@ -206,23 +206,18 @@ Se solicita a través de una proposición de ley por iniciativa popular, la cual
             const gmailWebUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
             
             if (isAndroid) {
-                // Intentar abrir app de Gmail en Android
-                window.location.href = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;scheme=googlemail;package=com.google.android.gm;end`;
-                
-                // Fallback a Gmail web si la app no se abre
-                setTimeout(() => {
-                    window.open(gmailWebUrl, '_blank');
-                }, 200);
+                // Solución específica para Android con manejo de intents
+                const intentUrl = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;scheme=googlemail;package=com.google.android.gm;S.browser_fallback_url=${encodeURIComponent(gmailWebUrl)};end;`;
+                window.location.href = intentUrl;
             } else if (isiOS) {
-                // Intentar abrir app de Gmail en iOS
+                // Solución específica para iOS con manejo de fallback
                 window.location.href = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                // Fallback a Gmail web si la app no se abre
                 setTimeout(() => {
-                    window.open(gmailWebUrl, '_blank');
-                }, 200);
+                    if (!document.hidden) {
+                        window.open(gmailWebUrl, '_blank');
+                    }
+                }, 500);
             } else {
-                // Para escritorio, abrir Gmail web directamente
                 window.open(gmailWebUrl, '_blank');
             }
         }
