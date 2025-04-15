@@ -84,6 +84,7 @@ Se solicita a través de una proposición de ley por iniciativa popular, la cual
             const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
+
             
             // Nueva solución para evitar doble apertura
             let gmailOpened = false;
@@ -102,14 +103,19 @@ Se solicita a través de una proposición de ley por iniciativa popular, la cual
                 }, 300);
             };
 
-            if (isAndroid) {
-                // URL para Android con detección precisa
-                const appUrl = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;scheme=googlemail;package=com.google.android.gm;end;`;
-                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                tryOpenApp(appUrl, webUrl);
-                gmailOpened = true;
-
+                if (isAndroid) {
+            const appUrl = `googlemail://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            
+            // Intentar abrir la app
+            window.location.href = appUrl;
+            
+            // Verificar si falló
+            setTimeout(() => {
+                if (!document.hidden) { // Si la página sigue visible, la app no se abrió
+                    window.open(webUrl, '_blank');
+                }
+            }, 1000); // Aumentar el timeout
             } else if (isiOS) {
                 // URL para iOS con verificación nativa
                 const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
