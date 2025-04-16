@@ -55,108 +55,46 @@
 
     <script>
         const contenidoBase = `Para: registro@defensordelpueblo.es
-Asunto: Solicitud formal de derecho a decidir
-
-------------------------------------------
-
-Ciudadano solicitante:
-- Nombre completo: [COMPLETAR AQUÍ]
-- DNI/NIE: [COMPLETAR AQUÍ]
-- Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
-- Dirección: [COMPLETAR AQUÍ]
-- Teléfono: [COMPLETAR AQUÍ]
-
-------------------------------------------
-
-Solicitud formal:
-Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
-
-Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
-
-        function abrirClienteCorreo() {
-            const subject = 'Solicitud formal de derecho a decidir';
-            const body = contenidoBase;
-            window.location.href = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-        }
-
+    Asunto: Solicitud formal de derecho a decidir
+    
+    ------------------------------------------
+    
+    Ciudadano solicitante:
+    - Nombre completo: [COMPLETAR AQUÍ]
+    - DNI/NIE: [COMPLETAR AQUÍ]
+    - Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
+    - Dirección: [COMPLETAR AQUÍ]
+    - Teléfono: [COMPLETAR AQUÍ]
+    
+    ------------------------------------------
+    
+    Solicitud formal:
+    Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
+    
+    Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
+    
         function abrirGmail() {
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
-
-            
-            // Nueva solución para evitar doble apertura
-            let gmailOpened = false;
-            
-            const tryOpenApp = (urlScheme, fallbackUrl) => {
-                const iframe = document.createElement('iframe');
-                iframe.style.display = 'none';
-                iframe.src = urlScheme;
-                document.body.appendChild(iframe);
-                
-                setTimeout(() => {
-                    document.body.removeChild(iframe);
-                    if (!gmailOpened) {
-                        window.open(fallbackUrl, '_blank');
-                    }
-                }, 300);
-            };
-
-                if (isAndroid) {
-            const appUrl = `googlemail://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            
-            // Intentar abrir la app
-            window.location.href = appUrl;
-            
-            // Verificar si falló
-            setTimeout(() => {
-                if (!document.hidden) { // Si la página sigue visible, la app no se abrió
-                    window.open(webUrl, '_blank');
-                }
-            }, 1000); // Aumentar el timeout
-            } else if (isiOS) {
-                // URL para iOS con verificación nativa
-                const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                
-                window.location.href = appUrl;
-                setTimeout(() => {
-                    if (!document.hidden) {
-                        window.open(webUrl, '_blank');
-                    }
-                }, 500);
-                
-            } else {
-                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
-            }
+            const mailtoLink = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+            // Evita redirección a Play Store (problema típico en Android)
+            window.location.href = mailtoLink;
         }
-
+    
+        function abrirClienteCorreo() {
+            abrirGmail(); // Usa el mismo método mailto, para compatibilidad
+        }
+    
         function copiarTexto() {
-            const textarea = document.createElement('textarea');
-            textarea.value = contenidoBase;
-            textarea.style.position = 'fixed';
-            textarea.style.opacity = '0';
-            document.body.appendChild(textarea);
-            textarea.select();
-            
-            try {
-                const successful = document.execCommand('copy');
-                document.body.removeChild(textarea);
-                
-                if (successful) {
-                    alert('✅ Texto copiado al portapapeles\n\nPega directamente en tu correo');
-                } else {
-                    throw new Error('Falló la copia');
-                }
-            } catch (err) {
-                const copyText = window.prompt('Por favor copia este texto manualmente:', contenidoBase);
-                if (copyText) {
-                    alert('Gracias por copiar el texto');
-                }
-            }
+            navigator.clipboard.writeText(contenidoBase).then(() => {
+                alert("Texto copiado al portapapeles.");
+            }).catch(err => {
+                alert("Error al copiar el texto: " + err);
+            });
         }
     </script>
+    
+    
 </body>
 </html>
