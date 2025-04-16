@@ -83,8 +83,12 @@
         }
     
         function abrirClienteCorreo() {
-            abrirGmail(); // Usa el mismo método mailto, para compatibilidad
-        }
+        const subject = 'Solicitud formal de derecho a decidir';
+        const body = contenidoBase;
+        const mailto = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+        window.location.href = mailto;
+    }
     
         function copiarTexto() {
             navigator.clipboard.writeText(contenidoBase).then(() => {
