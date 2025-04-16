@@ -16,17 +16,16 @@
 
         <main class="main-content">
             <div class="action-buttons">
-                
                 <button class="btn btn-danger" onclick="abrirGmail()">
                     <i class="fab fa-google"></i>
                     Abrir en Gmail
                 </button>
 
-                <button class="btn btn-primary" onclick="abrirClienteCorreo()">
+                <button class="btn btn-primary" onclick="abrirMailApp()">
                     <i class="fas fa-envelope"></i>
                     Abrir en Mail (iOS)
                 </button>
-                
+
                 <button class="btn btn-primary1" onclick="copiarTexto()">
                     <i class="fas fa-copy"></i>
                     Copiar Texto
@@ -71,57 +70,36 @@ Solicito el derecho a poder decidir destituir a un cargo político de forma inme
 Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
 
         function abrirGmail() {
-            const isAndroid = /Android/i.test(navigator.userAgent);
-            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
+            const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-            if (isAndroid) {
-                const appUrl = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;package=com.google.android.gm;scheme=mailto;end`;
-                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
+            const confirmado = confirm("¿Tienes instalada la app de Gmail?\nPulsa 'Aceptar' para abrirla. Si no pasa nada, volverás a Gmail Web.");
+            if (confirmado) {
                 window.location.href = appUrl;
 
                 setTimeout(() => {
                     if (!document.hidden) {
                         window.open(webUrl, '_blank');
                     }
-                }, 1000);
-            } else if (isiOS) {
-                const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-                window.location.href = appUrl;
-                setTimeout(() => {
-                    if (!document.hidden) {
-                        window.open(webUrl, '_blank');
-                    }
-                }, 500);
-            } else {
-                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+                }, 3000); // Espera más larga para permitir aceptar el aviso de Safari
             }
         }
 
-        function abrirClienteCorreo() {
+        function abrirMailApp() {
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
-            window.location.href = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const mailtoLink = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            window.location.href = mailtoLink;
         }
 
         function copiarTexto() {
             navigator.clipboard.writeText(contenidoBase).then(() => {
-                alert('✅ Texto copiado. Ahora puedes pegarlo en tu app de correo.');
-            }, (err) => {
-                alert('❌ Error al copiar el texto. Inténtalo manualmente.');
+                alert("Texto copiado al portapapeles. Ahora pégalo en tu app de correo.");
+            }, () => {
+                alert("Error al copiar el texto. Intenta manualmente.");
             });
-        }
-
-        // Aviso para usuarios de Chrome en iOS
-        const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-        const esChrome = /CriOS/.test(navigator.userAgent);
-
-        if (esIOS && esChrome) {
-            alert("⚠️ Si quieres usar la app Mail, abre esta página en Safari.");
         }
     </script>
 </body>
