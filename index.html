@@ -76,19 +76,18 @@
         function abrirGmail() {
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
-            const mailtoLink = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     
-            // Evita redirección a Play Store (problema típico en Android)
-            window.location.href = mailtoLink;
+            window.open(gmailUrl, '_blank');
         }
     
         function abrirClienteCorreo() {
-        const subject = 'Solicitud formal de derecho a decidir';
-        const body = contenidoBase;
-        const mailto = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-
-        window.location.href = mailto;
-    }
+            const subject = 'Solicitud formal de derecho a decidir';
+            const body = contenidoBase;
+            const mailto = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    
+            window.location.href = mailto;
+        }
     
         function copiarTexto() {
             navigator.clipboard.writeText(contenidoBase).then(() => {
@@ -98,6 +97,7 @@
             });
         }
     </script>
+    
     
     
 </body>
