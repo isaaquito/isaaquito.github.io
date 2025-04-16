@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciativa Ciudadana - Derecho a Decidir</title>
     <link rel="stylesheet" href="styles.css">
-    
 </head>
 <body>
     <div class="container">
@@ -25,7 +24,7 @@
 
                 <button class="btn btn-primary" onclick="abrirClienteCorreo()">
                     <i class="fas fa-envelope"></i>
-                    Abrir en Mail(iOS)
+                    Abrir en Mail (iOS)
                 </button>
                 
                 <button class="btn btn-primary1" onclick="copiarTexto()">
@@ -40,7 +39,7 @@
             <ol>
                 <li>Elige cómo quieres enviar la solicitud:
                     <ul style="margin-top: 0.5rem; list-style-type: none; padding-left: 1rem;">
-                        <li>📌 <strong>Gmail</strong> (para usuarios de Google/moviles Android)</li>
+                        <li>📌 <strong>Gmail</strong> (para usuarios de Google/móviles Android)</li>
                         <li>📌 <strong>Mail</strong> (para iPhone/iPad)</li>
                         <li>📌 <strong>Copiar texto</strong> (para otros servicios)</li>
                     </ul>
@@ -48,57 +47,82 @@
                 <li>Completa los datos que faltan en el correo (tu nombre, DNI, etc.)</li>
                 <li style="font-weight: bold;">¡IMPORTANTE! Asegúrate de enviarlo a: <span style="color: var(--azul-principal);">registro@defensordelpueblo.es</span></li>
             </ol>
-            <!-- <p style="margin-top: 1rem; font-style: italic; color: #555;">El sistema creará automáticamente el correo con la solicitud, solo tienes que añadir tus datos personales.</p> -->
         </section>
-
     </div>
 
     <script>
         const contenidoBase = `Para: registro@defensordelpueblo.es
-    Asunto: Solicitud formal de derecho a decidir
-    
-    ------------------------------------------
-    
-    Ciudadano solicitante:
-    - Nombre completo: [COMPLETAR AQUÍ]
-    - DNI/NIE: [COMPLETAR AQUÍ]
-    - Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
-    - Dirección: [COMPLETAR AQUÍ]
-    - Teléfono: [COMPLETAR AQUÍ]
-    
-    ------------------------------------------
-    
-    Solicitud formal:
-    Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
-    
-    Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
-    
+Asunto: Solicitud formal de derecho a decidir
+
+------------------------------------------
+
+Ciudadano solicitante:
+- Nombre completo: [COMPLETAR AQUÍ]
+- DNI/NIE: [COMPLETAR AQUÍ]
+- Fecha/lugar nacimiento: [COMPLETAR AQUÍ]
+- Dirección: [COMPLETAR AQUÍ]
+- Teléfono: [COMPLETAR AQUÍ]
+
+------------------------------------------
+
+Solicitud formal:
+Solicito el derecho a poder decidir destituir a un cargo político de forma inmediata durante su mandato cuando hace mal su trabajo y elegir a otro en su lugar cuando la mayoría de los ciudadanos lo requieran.
+
+Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
+
         function abrirGmail() {
+            const isAndroid = /Android/i.test(navigator.userAgent);
+            const isiOS = /iPhone|iPad|iPod/i.test(navigator.userAgent);
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
-            const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-            window.open(gmailUrl, '_blank');
+
+            if (isAndroid) {
+                const appUrl = `intent://compose?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}#Intent;package=com.google.android.gm;scheme=mailto;end`;
+                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                window.location.href = appUrl;
+
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(webUrl, '_blank');
+                    }
+                }, 1000);
+            } else if (isiOS) {
+                const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+                const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+
+                window.location.href = appUrl;
+                setTimeout(() => {
+                    if (!document.hidden) {
+                        window.open(webUrl, '_blank');
+                    }
+                }, 500);
+            } else {
+                window.open(`https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`, '_blank');
+            }
         }
-    
+
         function abrirClienteCorreo() {
             const subject = 'Solicitud formal de derecho a decidir';
             const body = contenidoBase;
-            const mailto = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    
-            window.location.href = mailto;
+            window.location.href = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
         }
-    
+
         function copiarTexto() {
             navigator.clipboard.writeText(contenidoBase).then(() => {
-                alert("Texto copiado al portapapeles.");
-            }).catch(err => {
-                alert("Error al copiar el texto: " + err);
+                alert('✅ Texto copiado. Ahora puedes pegarlo en tu app de correo.');
+            }, (err) => {
+                alert('❌ Error al copiar el texto. Inténtalo manualmente.');
             });
         }
+
+        // Aviso para usuarios de Chrome en iOS
+        const esIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
+        const esChrome = /CriOS/.test(navigator.userAgent);
+
+        if (esIOS && esChrome) {
+            alert("⚠️ Si quieres usar la app Mail, abre esta página en Safari.");
+        }
     </script>
-    
-    
-    
 </body>
 </html>
