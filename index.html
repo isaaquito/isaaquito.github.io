@@ -71,23 +71,26 @@ Solicito el derecho a poder decidir destituir a un cargo político de forma inme
 
 Se solicita a través de una proposición de ley por iniciativa popular, la cual será entregada por el Defensor del Pueblo al Congreso de los Diputados, una vez recibidas todas las solicitudes.`;
 
-        function abrirGmail() {
-            const subject = 'Solicitud formal de derecho a decidir';
-            const body = contenidoBase;
-            const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-            const webUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=registro@defensordelpueblo.es&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+function abrirGmail() {
+    const subject = 'Solicitud formal de derecho a decidir';
+    const body = contenidoBase;
+    const appUrl = `googlegmail:///co?to=registro@defensordelpueblo.es&subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    const mailtoLink = `mailto:registro@defensordelpueblo.es?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
-            const confirmado = confirm("¿Tienes instalada la app de Gmail?\nPulsa 'Aceptar' para abrirla. Si no pasa nada, volverás a Gmail Web.");
-            if (confirmado) {
-                window.location.href = appUrl;
-
-                setTimeout(() => {
-                    if (!document.hidden) {
-                        window.open(webUrl, '_blank');
-                    }
-                }, 3000); // Espera más larga para permitir aceptar el aviso de Safari
+    const confirmado = confirm("¿Tienes instalada la app de Gmail?\nPulsa 'Aceptar' para abrirla. Si no funciona, se abrirá tu aplicación de correo predeterminada.");
+    
+    if (confirmado) {
+        // Intenta abrir la app de Gmail
+        window.location.href = appUrl;
+        
+        // Si después de 3 segundos no se abrió la app, usa mailto:
+        setTimeout(() => {
+            if (!document.hidden) {
+                window.location.href = mailtoLink;
             }
-        }
+        }, 3000);
+    }
+}
 
         function abrirMailApp() {
             const subject = 'Solicitud formal de derecho a decidir';
